@@ -76,11 +76,11 @@ method 是固定的，key，t 分别是商品地址和时间戳。
 
 **难点是 token 字段的生成方式**
 
-<img src="assets/img/image-20210114134237228.png" alt="image-20210114134237228" style="width:80%;" />
+<img src="./assets/img/image-20210114134237228.png" alt="image-20210114134237228" style="width:80%;" />
 
 ### 请求头报文(Request Header)
 
-<img src="assets/img/image-20210114134630360.png" alt="image-20210114134630360" style="width:80%;" />
+<img src="./assets/img/image-20210114134630360.png" alt="image-20210114134630360" style="width:80%;" />
 
 请求头中 Authorization 代表的是 Web端 对访问用户身份的认证，这个知识点，在 [08.确认访问用户身份的认证](./pages/8e336c) 已经写过，Basic Auth 属于一种基本的认证方式，本质上就是通过 Base64 对账户密码进行编码后传输，编码可以通过Base64 反编码，所以本质上就是一种明文的传输方式。所以，我们可以尝试反编译一下。
 
@@ -176,11 +176,11 @@ if __name__ == '__main__':
 
 下面我们看看这段加密代码，发现有70多行，手动破解太费劲了。
 
-<img src="assets/img/image-20210114152610556.png" alt="image-20210114152610556" style="width:80%;" />
+<img src="./assets/img/image-20210114152610556.png" alt="image-20210114152610556" style="width:80%;" />
 
 而且通过 `encode_version` 发现，这是使用 jsjiami.com 做的加密。
 
-<img src="assets/img/image-20210114152900610.png" alt="image-20210114152900610" style="width:80%;" />
+<img src="./assets/img/image-20210114152900610.png" alt="image-20210114152900610" style="width:80%;" />
 
 首先，要先把 js 代码调试出来
 
@@ -217,6 +217,10 @@ trans_code = re.sub(pattern, callJsFunc, raw_code)
 with open('customRequest_trans.js', 'w', encoding="utf-8") as fw:
     fw.write(trans_code)
 ```
+
+> 原 JavaScript 文件：https://github.com/PPsteven/manmanbuy_js_crack/blob/master/customRequest.js
+>
+> 破解后的 JavaScript 文件：https://github.com/PPsteven/manmanbuy_js_crack/blob/master/customRequest_trans_%E8%BD%AC%E7%A0%81.js
 
 ## token 参数还原
 
@@ -392,6 +396,12 @@ def create_auth():
     return ''
 ```
 
+## Github 仓库
+
+[manmanbuy_js_crack](https://github.com/PPsteven/manmanbuy_js_crack)
+
 ## 参考资料
 
 [某 JS 加密逆向还原简单分析](https://www.myitmx.com/96.html)
+
+
